@@ -85,6 +85,20 @@ export default function TabLayout() {
           ),
         }}
       />
+      <Tabs.Screen
+        name="reanimated"
+        options={{
+          title: 'Reanimated',
+          tabBarButton,
+          tabBarLabelStyle: textStyles.default,
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon
+              name={focused ? 'code-slash' : 'code-slash-outline'}
+              color={color}
+            />
+          ),
+        }}
+      />
     </Tabs>
   );
 }

@@ -1,5 +1,10 @@
-import React, { useMemo, useState } from 'react';
-import { StyleSheet, useWindowDimensions, View } from 'react-native';
+import React, { useMemo } from 'react';
+import {
+  StyleSheet,
+  View,
+  useColorScheme,
+  useWindowDimensions,
+} from 'react-native';
 import {
   BlurMask,
   vec,
@@ -14,10 +19,6 @@ import type { SharedValue } from 'react-native-reanimated';
 import { useDerivedValue } from 'react-native-reanimated';
 
 import { useLoop } from './Animations';
-import { useFocusEffect } from 'expo-router';
-
-const c1 = '#61bea2';
-const c2 = '#529ca0';
 
 interface RingProps {
   index: number;
@@ -27,7 +28,11 @@ interface RingProps {
 
 const Ring = ({ index, progress, total }: RingProps) => {
   const { width, height } = useWindowDimensions();
-  const R = width / 4;
+  const colorScheme = useColorScheme();
+  const c1 = colorScheme === 'dark' ? '#61bea2' : '#223344';
+  const c2 = colorScheme === 'dark' ? '#529ca0' : '#334455';
+
+  const R = width / 8;
   const center = useMemo(
     () => vec(width / 2, height / 2 - 64),
     [height, width],
@@ -39,7 +44,7 @@ const Ring = ({ index, progress, total }: RingProps) => {
       { theta, radius: progress.value * R },
       { x: 0, y: 0 },
     );
-    const scale = mix(progress.value, 0.3, 1);
+    const scale = mix(progress.value, 0.3, 0.6);
     return [{ translateX: x }, { translateY: y }, { scale }];
   });
 
@@ -55,39 +60,35 @@ const Ring = ({ index, progress, total }: RingProps) => {
 };
 
 export const Breathe = () => {
-  const { width, height } = useWindowDimensions();
-  const center = useMemo(
-    () => vec(width / 2, height / 2 - 64),
-    [height, width],
-  );
-  const [visible, setVisible] = useState(false);
+  const width = 800;
+  const height = 300;
+  const center = useMemo(() => vec(width / 2, height / 2), [height, width]);
 
-  useFocusEffect(() => {
-    setVisible(true);
-    return () => setVisible(false);
-  });
+  const colorScheme = useColorScheme();
 
   const progress = useLoop({ duration: 3000 });
 
   const transform = useDerivedValue(() => [
-    { rotate: mix(progress.value, -Math.PI, 0) },
+    { rotate: mix(progress.value, -Math.PI / 2, 0) },
   ]);
 
   return (
-    <View style={{ flex: 1 }}>
-      {visible && (
-        <Canvas style={styles.container} opaque>
-          <Fill color="rgb(36,43,56)" />
-          <Group origin={center} transform={transform} blendMode="screen">
-            <BlurMask style="solid" blur={40} />
-            {new Array(6).fill(0).map((_, index) => {
-              return (
-                <Ring key={index} index={index} progress={progress} total={6} />
-              );
-            })}
-          </Group>
-        </Canvas>
-      )}
+    <View style={styles.container}>
+      <Canvas style={{ width, height }} opaque>
+        <Fill
+          color={
+            colorScheme === 'dark' ? 'rgb(20, 30, 40)' : 'rgb(247, 249, 251)'
+          }
+        />
+        <Group origin={center} transform={transform} blendMode="hardLight">
+          <BlurMask style="solid" blur={40} />
+          {new Array(6).fill(0).map((_, index) => {
+            return (
+              <Ring key={index} index={index} progress={progress} total={6} />
+            );
+          })}
+        </Group>
+      </Canvas>
     </View>
   );
 };
@@ -95,5 +96,7 @@ export const Breathe = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

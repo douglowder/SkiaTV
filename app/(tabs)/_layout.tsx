@@ -72,13 +72,30 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="tv_focus"
+        name="filters"
         options={{
-          title: 'TV event demo',
+          title: 'Filters',
           tabBarButton,
           tabBarLabelStyle: textStyles.default,
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'tv' : 'tv-outline'} color={color} />
+            <TabBarIcon
+              name={focused ? 'code-slash' : 'code-slash-outline'}
+              color={color}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="glass"
+        options={{
+          title: 'Glassmorphism',
+          tabBarButton,
+          tabBarLabelStyle: textStyles.default,
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon
+              name={focused ? 'code-slash' : 'code-slash-outline'}
+              color={color}
+            />
           ),
         }}
       />

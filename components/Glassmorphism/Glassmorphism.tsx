@@ -16,16 +16,16 @@ import { StyleSheet } from 'react-native';
 
 import { useLoop } from '../Animations';
 import { ThemedView } from '../ThemedView';
+import { useScale } from '@/hooks/useScale';
 
 export const Glassmorphism = () => {
-  const width = 800;
-  const height = 300;
-  const c = vec(width / 2, height / 2);
+  const { scale } = useScale();
+  const width = 1000 * scale;
+  const height = 500 * scale;
+  const styles = useDemoStyles();
+  const c = vec(width / 2, height * 0.6);
   const r = c.x - 32;
-  const rect = useMemo(
-    () => ({ x: 0, y: c.y, width, height: c.y }),
-    [c.y, width],
-  );
+  const rect = useMemo(() => ({ x: 0, y: c.y, width, height }), [c.y, width]);
 
   const progress = useLoop({ duration: 2000 });
   const start = useDerivedValue(
@@ -60,10 +60,14 @@ export const Glassmorphism = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
+const useDemoStyles = () => {
+  const { scale } = useScale();
+  return StyleSheet.create({
+    container: {
+      flex: 1,
+      marginTop: 250 * scale,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+  });
+};

@@ -11,7 +11,7 @@ import { useScale } from '@/hooks/useScale';
 export default function TabLayout() {
   const colorScheme = useColorScheme();
   const textStyles = useTextStyles();
-  const scale = useScale();
+  const { scale } = useScale();
 
   const tabBarButton = (props: BottomTabBarButtonProps) => {
     const style: any = props.style ?? {};
@@ -61,20 +61,6 @@ export default function TabLayout() {
         name="breathe"
         options={{
           title: 'Breathe',
-          tabBarButton,
-          tabBarLabelStyle: textStyles.default,
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon
-              name={focused ? 'code-slash' : 'code-slash-outline'}
-              color={color}
-            />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="filters"
-        options={{
-          title: 'Filters',
           tabBarButton,
           tabBarLabelStyle: textStyles.default,
           tabBarIcon: ({ color, focused }) => (

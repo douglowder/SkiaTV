@@ -20,6 +20,9 @@ import { useDerivedValue } from 'react-native-reanimated';
 
 import { useLoop } from './Animations';
 
+import { useScale } from '@/hooks/useScale';
+import { ThemedView } from './ThemedView';
+
 interface RingProps {
   index: number;
   progress: SharedValue<number>;
@@ -27,7 +30,9 @@ interface RingProps {
 }
 
 const Ring = ({ index, progress, total }: RingProps) => {
-  const { width, height } = useWindowDimensions();
+  const { scale } = useScale();
+  const width = 1000 * scale;
+  const height = 500 * scale;
   const colorScheme = useColorScheme();
   const c1 = colorScheme === 'dark' ? '#61bea2' : '#223344';
   const c2 = colorScheme === 'dark' ? '#529ca0' : '#334455';
@@ -60,8 +65,10 @@ const Ring = ({ index, progress, total }: RingProps) => {
 };
 
 export const Breathe = () => {
-  const width = 800;
-  const height = 300;
+  const { scale } = useScale();
+  const width = 1000 * scale;
+  const height = 500 * scale;
+  const styles = useDemoStyles();
   const center = useMemo(() => vec(width / 2, height / 2), [height, width]);
 
   const colorScheme = useColorScheme();
@@ -73,7 +80,7 @@ export const Breathe = () => {
   ]);
 
   return (
-    <View style={styles.container}>
+    <ThemedView style={styles.container}>
       <Canvas style={{ width, height }} opaque>
         <Fill
           color={
@@ -89,14 +96,18 @@ export const Breathe = () => {
           })}
         </Group>
       </Canvas>
-    </View>
+    </ThemedView>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
+const useDemoStyles = () => {
+  const { scale } = useScale();
+  return StyleSheet.create({
+    container: {
+      flex: 1,
+      marginTop: 250 * scale,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+  });
+};

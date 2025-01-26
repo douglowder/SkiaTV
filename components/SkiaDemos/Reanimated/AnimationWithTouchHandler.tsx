@@ -1,14 +1,14 @@
 import React from 'react';
-import { StyleSheet, useWindowDimensions } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Canvas, Circle, Fill } from '@shopify/react-native-skia';
 import { GestureDetector, Gesture } from 'react-native-gesture-handler';
-import { useSharedValue, withDecay } from 'react-native-reanimated';
+import { useSharedValue, withDecay, withTiming } from 'react-native-reanimated';
 
 import { AnimationDemo, Size, Padding } from './Components';
 import { useScale } from '@/hooks/useScale';
 
 export const AnimationWithTouchHandler = () => {
-  const { width: windowWidth } = useScale();
+  const { width: windowWidth, scale } = useScale();
   const width = windowWidth * 0.9;
 
   const translateX = useSharedValue((width - Size - Padding) / 2);
@@ -26,8 +26,32 @@ export const AnimationWithTouchHandler = () => {
       });
     });
 
+  const pressGesture = () => {
+    const oldValue = translateX.value;
+    const leftBoundary = oldValue;
+    const rightBoundary = oldValue;
+    translateX.value = withTiming(oldValue + 500 * scale, {
+      duration: 1000,
+    });
+    setTimeout(
+      () =>
+        (translateX.value = withDecay({
+          velocity: -500,
+          clamp: [leftBoundary, rightBoundary],
+          rubberBandEffect: true,
+          rubberBandFactor: 2,
+        })),
+      2000,
+    );
+  };
   return (
-    <AnimationDemo title={'Decay animation with touch handler'}>
+    <AnimationDemo
+      title="Decay animation with touch handler"
+      button={{
+        title: 'Pull right and then let go',
+        action: pressGesture,
+      }}
+    >
       <GestureDetector gesture={gesture}>
         <Canvas style={styles.canvas}>
           <Fill color="white" />

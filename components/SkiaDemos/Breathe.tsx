@@ -1,10 +1,5 @@
 import React, { useMemo } from 'react';
-import {
-  StyleSheet,
-  View,
-  useColorScheme,
-  useWindowDimensions,
-} from 'react-native';
+import { StyleSheet, useColorScheme } from 'react-native';
 import {
   BlurMask,
   vec,
@@ -21,7 +16,7 @@ import { useDerivedValue } from 'react-native-reanimated';
 import { useLoop } from './Animations';
 
 import { useScale } from '@/hooks/useScale';
-import { ThemedView } from './ThemedView';
+import { ThemedView } from '@/components/ThemedView';
 
 interface RingProps {
   index: number;
@@ -65,11 +60,14 @@ const Ring = ({ index, progress, total }: RingProps) => {
 };
 
 export const Breathe = () => {
-  const { scale } = useScale();
-  const width = 1000 * scale;
-  const height = 500 * scale;
-  const styles = useDemoStyles();
-  const center = useMemo(() => vec(width / 2, height / 2), [height, width]);
+  const { width: screenWidth, scale } = useScale();
+  const width = 900 * scale;
+  const height = 400 * scale;
+  const styles = demoStyles(screenWidth, height);
+  const center = useMemo(
+    () => vec(screenWidth / 2, height / 2),
+    [height, width],
+  );
 
   const colorScheme = useColorScheme();
 
@@ -100,12 +98,11 @@ export const Breathe = () => {
   );
 };
 
-const useDemoStyles = () => {
-  const { scale } = useScale();
+const demoStyles = (width: number, height: number) => {
   return StyleSheet.create({
     container: {
-      flex: 1,
-      marginTop: 250 * scale,
+      width,
+      height,
       justifyContent: 'center',
       alignItems: 'center',
     },

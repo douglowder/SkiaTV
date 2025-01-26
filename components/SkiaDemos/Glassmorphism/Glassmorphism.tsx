@@ -15,15 +15,14 @@ import { useDerivedValue } from 'react-native-reanimated';
 import { StyleSheet } from 'react-native';
 
 import { useLoop } from '../Animations';
-import { ThemedView } from '../ThemedView';
+import { ThemedView } from '../../ThemedView';
 import { useScale } from '@/hooks/useScale';
 
 export const Glassmorphism = () => {
-  const { scale } = useScale();
-  const width = 1000 * scale;
-  const height = 500 * scale;
-  const styles = useDemoStyles();
-  const c = vec(width / 2, height * 0.6);
+  const { width: screenWidth, scale } = useScale();
+  const width = 900 * scale;
+  const height = 400 * scale;
+  const c = vec(screenWidth / 2, height * 0.6);
   const r = c.x - 32;
   const rect = useMemo(() => ({ x: 0, y: c.y, width, height }), [c.y, width]);
 
@@ -41,6 +40,7 @@ export const Glassmorphism = () => {
     [progress],
   );
 
+  const styles = demoStyles(screenWidth, height);
   return (
     <ThemedView style={styles.container}>
       <Canvas style={{ width, height }} opaque>
@@ -60,12 +60,11 @@ export const Glassmorphism = () => {
   );
 };
 
-const useDemoStyles = () => {
-  const { scale } = useScale();
+const demoStyles = (width: number, height: number) => {
   return StyleSheet.create({
     container: {
-      flex: 1,
-      marginTop: 250 * scale,
+      width,
+      height,
       justifyContent: 'center',
       alignItems: 'center',
     },

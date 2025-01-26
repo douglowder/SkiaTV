@@ -1,10 +1,11 @@
 import React from 'react';
-import { StyleSheet, useWindowDimensions } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Canvas, Circle, Fill, Line } from '@shopify/react-native-skia';
 import {
   useDerivedValue,
   useSharedValue,
   withSpring,
+  withTiming,
 } from 'react-native-reanimated';
 import { GestureDetector, Gesture } from 'react-native-gesture-handler';
 
@@ -15,7 +16,7 @@ const FgColor = '#DC4C4C';
 const BgColor = '#EC795A';
 
 export const SpringBackTouchAnimation = () => {
-  const { width: windowWidth } = useScale();
+  const { width: windowWidth, scale } = useScale();
   const width = windowWidth * 0.9;
 
   const startX = width / 2 - (Size * 2 - Padding) + Size;
@@ -37,8 +38,22 @@ export const SpringBackTouchAnimation = () => {
       centerY.value = withSpring(startY);
     });
 
+  const pressGesture = () => {
+    const oldValue = centerX.value;
+    centerX.value = withTiming(oldValue + 200 * scale, {
+      duration: 1000,
+    });
+    setTimeout(() => (centerX.value = withSpring(oldValue)), 2000);
+  };
+
   return (
-    <AnimationDemo title={'Spring back animation'}>
+    <AnimationDemo
+      title={'Spring back animation'}
+      button={{
+        title: 'Pull right and spring back',
+        action: pressGesture,
+      }}
+    >
       <GestureDetector gesture={gesture}>
         <Canvas style={styles.canvas}>
           <Fill color="white" />

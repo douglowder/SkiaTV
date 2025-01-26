@@ -23,6 +23,7 @@ export const SpringBackTouchAnimation = () => {
   const startY = 2 * Size;
   const centerX = useSharedValue(startX);
   const centerY = useSharedValue(startY);
+  const savedCenterX = useSharedValue(startX);
 
   const rectCenter = useDerivedValue(() => {
     return { x: centerX.value, y: centerY.value };
@@ -38,20 +39,26 @@ export const SpringBackTouchAnimation = () => {
       centerY.value = withSpring(startY);
     });
 
-  const pressGesture = () => {
-    const oldValue = centerX.value;
-    centerX.value = withTiming(oldValue + 200 * scale, {
+  const pressInGesture = () => {
+    savedCenterX.value = centerX.value;
+    centerX.value = withTiming(savedCenterX.value + 200 * scale, {
       duration: 1000,
     });
-    setTimeout(() => (centerX.value = withSpring(oldValue)), 2000);
+  };
+
+  const pressOutGesture = () => {
+    centerX.value = withSpring(savedCenterX.value);
   };
 
   return (
     <AnimationDemo
       title={'Spring back animation'}
       button={{
-        title: 'Pull right and spring back',
-        action: pressGesture,
+        title: 'Press and hold to pull right, let go to spring back',
+        actions: {
+          onPressIn: pressInGesture,
+          onPressOut: pressOutGesture,
+        },
       }}
     >
       <GestureDetector gesture={gesture}>

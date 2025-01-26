@@ -48,8 +48,10 @@ export const AnimationWithTouchHandler = () => {
     <AnimationDemo
       title="Decay animation with touch handler"
       button={{
-        title: 'Pull right and then let go',
-        action: pressGesture,
+        title: 'Press to pull right and then let go',
+        actions: {
+          onPress: pressGesture,
+        },
       }}
     >
       <GestureDetector gesture={gesture}>

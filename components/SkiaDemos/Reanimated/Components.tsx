@@ -8,9 +8,15 @@ import { useThemeColor } from '@/hooks/useThemeColor';
 export const Size = 20;
 export const Padding = 10;
 
+type ButtonActionProps = {
+  onPress?: () => void;
+  onPressIn?: () => void;
+  onPressOut?: () => void;
+};
+
 type ButtonProps = {
   title: string;
-  action: () => void;
+  actions?: ButtonActionProps;
 };
 
 export const AnimationDemo: React.FC<{
@@ -23,7 +29,15 @@ export const AnimationDemo: React.FC<{
     <View style={styles.container}>
       <ThemedText type="defaultSemiBold">{title}</ThemedText>
       {button && (
-        <Pressable onPress={() => button.action && button?.action()}>
+        <Pressable
+          onPress={() => button?.actions?.onPress && button?.actions?.onPress()}
+          onPressIn={() =>
+            button?.actions?.onPressIn && button?.actions?.onPressIn()
+          }
+          onPressOut={() =>
+            button?.actions?.onPressOut && button?.actions?.onPressOut()
+          }
+        >
           {({ pressed, focused }) => (
             <ThemedText
               type={pressed || focused ? 'link' : 'default'}

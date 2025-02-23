@@ -2,7 +2,6 @@ import { Tabs } from 'expo-router';
 import React from 'react';
 import { Platform, Pressable } from 'react-native';
 import { BottomTabBarButtonProps } from '@react-navigation/bottom-tabs';
-import { TabBarIcon } from '@/components/navigation/TabBarIcon';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { useTextStyles } from '@/hooks/useTextStyles';
@@ -80,6 +79,24 @@ export default function TabLayout() {
         name="reanimated"
         options={{
           title: 'Reanimated',
+          tabBarButton,
+          tabBarLabelStyle: textStyles.default,
+          tabBarIcon: () => null,
+        }}
+      />
+      <Tabs.Screen
+        name="barchart"
+        options={{
+          title: 'Bar Chart',
+          tabBarButton,
+          tabBarLabelStyle: textStyles.default,
+          tabBarIcon: () => null,
+        }}
+      />
+      <Tabs.Screen
+        name="linechart"
+        options={{
+          title: 'Line Chart',
           tabBarButton,
           tabBarLabelStyle: textStyles.default,
           tabBarIcon: () => null,

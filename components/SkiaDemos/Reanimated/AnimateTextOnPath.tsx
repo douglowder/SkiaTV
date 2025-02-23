@@ -77,7 +77,7 @@ export const AnimateTextOnPath = () => {
 const styles = StyleSheet.create({
   canvas: {
     height: ExampleHeight,
-    width: '100%' as const,
+    width: '80%' as const,
     backgroundColor: '#FEFEFE' as const,
   },
 });

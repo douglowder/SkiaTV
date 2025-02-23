@@ -1,6 +1,6 @@
 import { Tabs } from 'expo-router';
 import React from 'react';
-import { Pressable } from 'react-native';
+import { Platform, Pressable } from 'react-native';
 import { BottomTabBarButtonProps } from '@react-navigation/bottom-tabs';
 import { TabBarIcon } from '@/components/navigation/TabBarIcon';
 import { Colors } from '@/constants/Colors';
@@ -32,13 +32,19 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+        tabBarActiveBackgroundColor: Colors[colorScheme ?? 'light'].background,
         tabBarStyle: {
-          height: textStyles.title.lineHeight * 2,
+          height: '100%',
+          maxWidth: Platform.OS === 'android' ? 200 * scale : 150 * scale,
         },
-        tabBarPosition: 'top',
+        tabBarPosition: 'left',
         tabBarIconStyle: {
           height: textStyles.title.lineHeight,
-          width: 30 * scale,
+          width: 0,
+        },
+        tabBarItemStyle: {
+          width: 150 * scale,
+          marginLeft: Platform.OS === 'android' ? 180 * scale : 0,
         },
         headerShown: false,
       }}
@@ -49,12 +55,7 @@ export default function TabLayout() {
           title: 'Home',
           tabBarButton,
           tabBarLabelStyle: textStyles.default,
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon
-              name={focused ? 'home' : 'home-outline'}
-              color={color}
-            />
-          ),
+          tabBarIcon: () => null,
         }}
       />
       <Tabs.Screen
@@ -63,12 +64,7 @@ export default function TabLayout() {
           title: 'Breathe',
           tabBarButton,
           tabBarLabelStyle: textStyles.default,
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon
-              name={focused ? 'code-slash' : 'code-slash-outline'}
-              color={color}
-            />
-          ),
+          tabBarIcon: () => null,
         }}
       />
       <Tabs.Screen
@@ -77,12 +73,7 @@ export default function TabLayout() {
           title: 'Glassmorphism',
           tabBarButton,
           tabBarLabelStyle: textStyles.default,
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon
-              name={focused ? 'code-slash' : 'code-slash-outline'}
-              color={color}
-            />
-          ),
+          tabBarIcon: () => null,
         }}
       />
       <Tabs.Screen
@@ -91,12 +82,7 @@ export default function TabLayout() {
           title: 'Reanimated',
           tabBarButton,
           tabBarLabelStyle: textStyles.default,
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon
-              name={focused ? 'code-slash' : 'code-slash-outline'}
-              color={color}
-            />
-          ),
+          tabBarIcon: () => null,
         }}
       />
     </Tabs>

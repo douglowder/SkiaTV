@@ -4,7 +4,7 @@ import { Breathe } from '@/components/SkiaDemos/Breathe';
 
 export default function BreatheScreen() {
   return (
-    <SkiaDemoScreen title={`Skia demo "Breathe"`}>
+    <SkiaDemoScreen title={`Breathe`}>
       <Breathe />
     </SkiaDemoScreen>
   );

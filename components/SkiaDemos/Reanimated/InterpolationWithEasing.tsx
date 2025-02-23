@@ -18,14 +18,14 @@ function mix(value: number, x: number, y: number) {
 }
 
 export const InterpolationWithEasing = () => {
-  const { width: windowWidth } = useScale();
+  const { width: windowWidth, scale } = useScale();
   const width = windowWidth * 0.9;
   const progress = useSharedValue(0);
   const position = useDerivedValue(() => {
-    return mix(progress.value, 10, width - (Size + Padding));
+    return mix(progress.value, 10, width * 0.8 - (Size + Padding));
   });
   const radius = useDerivedValue(() => {
-    return 5 + progress.value * 55;
+    return 5 + progress.value * 25 * scale;
   });
   useEffect(() => {
     progress.value = withRepeat(
@@ -36,18 +36,16 @@ export const InterpolationWithEasing = () => {
   }, [progress]);
   return (
     <AnimationDemo title={'Interpolating value using an easing'}>
-      <Canvas style={styles.canvas}>
+      <Canvas
+        style={{
+          height: 60 * scale,
+          width: '80%' as const,
+          backgroundColor: '#FEFEFE' as const,
+        }}
+      >
         <Fill color="white" />
         <Circle cx={position} cy={20} r={radius} color="#DC4C4C" />
       </Canvas>
     </AnimationDemo>
   );
 };
-
-const styles = StyleSheet.create({
-  canvas: {
-    height: 40,
-    width: '100%' as const,
-    backgroundColor: '#FEFEFE' as const,
-  },
-});

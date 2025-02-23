@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, TVFocusGuideView } from 'react-native';
 
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
@@ -14,12 +14,14 @@ export const SkiaDemoScreen = ({
 }) => {
   const styles = useDemoStyles();
   return (
-    <ThemedView>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">{title}</ThemedText>
+    <TVFocusGuideView autoFocus style={{ height: '100%' }}>
+      <ThemedView>
+        <ThemedView style={styles.titleContainer}>
+          <ThemedText type="title">{title}</ThemedText>
+        </ThemedView>
+        {children}
       </ThemedView>
-      {children}
-    </ThemedView>
+    </TVFocusGuideView>
   );
 };
 

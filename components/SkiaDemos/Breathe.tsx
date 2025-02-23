@@ -34,7 +34,7 @@ const Ring = ({ index, progress, total }: RingProps) => {
 
   const R = width / 8;
   const center = useMemo(
-    () => vec(width / 2, height / 2 - 64),
+    () => vec(width / 2 - 150, height / 2 - 100),
     [height, width],
   );
 
@@ -61,11 +61,11 @@ const Ring = ({ index, progress, total }: RingProps) => {
 
 export const Breathe = () => {
   const { width: screenWidth, scale } = useScale();
-  const width = 900 * scale;
+  const width = 800 * scale;
   const height = 400 * scale;
   const styles = demoStyles(screenWidth, height);
   const center = useMemo(
-    () => vec(screenWidth / 2, height / 2),
+    () => vec(screenWidth / 2.5, height / 2),
     [height, width],
   );
 
@@ -79,7 +79,7 @@ export const Breathe = () => {
 
   return (
     <ThemedView style={styles.container}>
-      <Canvas style={{ width, height }} opaque>
+      <Canvas style={{ width, height, marginLeft: -200 * scale }} opaque>
         <Fill
           color={
             colorScheme === 'dark' ? 'rgb(20, 30, 40)' : 'rgb(247, 249, 251)'

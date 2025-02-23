@@ -31,8 +31,8 @@ export const textStyles = function (
       fontWeight: 'bold',
     },
     link: {
-      lineHeight: 30 * scale,
       fontSize: 16 * scale,
+      lineHeight: 24 * scale,
       color: linkColor,
     },
   };

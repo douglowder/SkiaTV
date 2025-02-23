@@ -17,7 +17,7 @@ const BgColor = '#EC795A';
 
 export const SpringBackTouchAnimation = () => {
   const { width: windowWidth, scale } = useScale();
-  const width = windowWidth * 0.9;
+  const width = windowWidth * 0.8;
 
   const startX = width / 2 - (Size * 2 - Padding) + Size;
   const startY = 2 * Size;
@@ -88,7 +88,7 @@ export const SpringBackTouchAnimation = () => {
 const styles = StyleSheet.create({
   canvas: {
     height: 280,
-    width: '100%' as const,
+    width: '80%' as const,
     backgroundColor: '#FEFEFE' as const,
   },
 });

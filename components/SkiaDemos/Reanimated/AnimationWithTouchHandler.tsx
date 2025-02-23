@@ -9,7 +9,7 @@ import { useScale } from '@/hooks/useScale';
 
 export const AnimationWithTouchHandler = () => {
   const { width: windowWidth, scale } = useScale();
-  const width = windowWidth * 0.9;
+  const width = windowWidth * 0.8;
 
   const translateX = useSharedValue((width - Size - Padding) / 2);
 
@@ -30,7 +30,7 @@ export const AnimationWithTouchHandler = () => {
     const oldValue = translateX.value;
     const leftBoundary = oldValue;
     const rightBoundary = oldValue;
-    translateX.value = withTiming(oldValue + 500 * scale, {
+    translateX.value = withTiming(oldValue + 100 * scale, {
       duration: 1000,
     });
     setTimeout(
@@ -48,27 +48,30 @@ export const AnimationWithTouchHandler = () => {
     <AnimationDemo
       title="Decay animation with touch handler"
       button={{
-        title: 'Press to pull right and then let go',
+        title: 'Press center button to trigger animation',
         actions: {
           onPress: pressGesture,
         },
       }}
     >
       <GestureDetector gesture={gesture}>
-        <Canvas style={styles.canvas}>
+        <Canvas
+          style={{
+            height: 80 * scale,
+            width: '80%' as const,
+            backgroundColor: '#FEFEFE' as const,
+          }}
+        >
           <Fill color="white" />
-          <Circle cx={translateX} cy={40} r={20} color="#3E3E" />
-          <Circle cx={translateX} cy={40} r={15} color="#AEAE" />
+          <Circle
+            cx={translateX}
+            cy={20 * scale}
+            r={10 * scale}
+            color="#3E3E"
+          />
+          <Circle cx={translateX} cy={20 * scale} r={8 * scale} color="#AEAE" />
         </Canvas>
       </GestureDetector>
     </AnimationDemo>
   );
 };
-
-const styles = StyleSheet.create({
-  canvas: {
-    height: 80,
-    width: '100%' as const,
-    backgroundColor: '#FEFEFE' as const,
-  },
-});

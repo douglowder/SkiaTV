@@ -12,9 +12,9 @@ import { SpringBackTouchAnimation } from './SpringBackTouch';
 export const ReanimatedExample: React.FC = () => {
   return (
     <ScrollView contentContainerStyle={styles.container}>
+      <AnimationWithTouchHandler />
       <SimpleAnimation />
       <InterpolationWithEasing />
-      <AnimationWithTouchHandler />
       <AnimateTextOnPath />
       <SpringBackTouchAnimation />
       <BokehExample />

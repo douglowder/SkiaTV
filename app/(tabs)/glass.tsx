@@ -4,7 +4,7 @@ import { Glassmorphism } from '@/components/SkiaDemos/Glassmorphism/index';
 
 export default function GlassmorphismScreen() {
   return (
-    <SkiaDemoScreen title={`Skia demo "Glassmorphism"`}>
+    <SkiaDemoScreen title={`Glassmorphism`}>
       <Glassmorphism />
     </SkiaDemoScreen>
   );

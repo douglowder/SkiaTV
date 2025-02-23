@@ -19,7 +19,10 @@ export const SimpleAnimation = () => {
     return { x: 0, y: 10, width: width.value, height: Size };
   });
   useEffect(() => {
-    width.value = withRepeat(withTiming(windowWidth, { duration: 1000 }), -1);
+    width.value = withRepeat(
+      withTiming(windowWidth * 0.8, { duration: 1000 }),
+      -1,
+    );
   }, [width, windowWidth]);
   return (
     <AnimationDemo title={'Basic animation using derived values'}>
@@ -34,7 +37,7 @@ export const SimpleAnimation = () => {
 const styles = StyleSheet.create({
   canvas: {
     height: 40,
-    width: '100%' as const,
+    width: '80%' as const,
     backgroundColor: '#FEFEFE' as const,
   },
 });

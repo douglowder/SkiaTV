@@ -3,7 +3,7 @@ import { SkiaDemoScreen } from '@/components/SkiaDemoScreen';
 
 export default function ReanimatedScreen() {
   return (
-    <SkiaDemoScreen title={`Skia Demo "Reanimated"`}>
+    <SkiaDemoScreen title={`Reanimated examples`}>
       <ReanimatedExample />
     </SkiaDemoScreen>
   );

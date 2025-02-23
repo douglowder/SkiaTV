@@ -9,44 +9,45 @@ import {
 import { Canvas, Circle, Fill } from '@shopify/react-native-skia';
 
 import { AnimationDemo } from './Components';
+import { useScale } from '@/hooks/useScale';
 
 const width = 600;
-const ExampleHeight = 300;
+const exampleHeight = 300;
 
-function getRandomWidth() {
-  return Math.random() * width;
+function getRandomWidth(scale: number) {
+  return Math.random() * width * scale;
 }
 
-function getRandomHeight() {
-  return Math.random() * ExampleHeight;
+function getRandomHeight(scale: number) {
+  return Math.random() * exampleHeight;
 }
 
-function getRandomHue() {
-  return 100 + Math.random() * 100;
+function getRandomHue(scale: number) {
+  return 100 + Math.random() * 100 * scale;
 }
 
-function getRandomPositionDiff() {
-  return -100 + Math.random() * 200;
+function getRandomPositionDiff(scale: number) {
+  return -100 + Math.random() * 200 * scale;
 }
 
-function getRandomHueDiff() {
-  return Math.random() * 100;
+function getRandomHueDiff(scale: number) {
+  return Math.random() * 100 * scale;
 }
 
-function MovingCircle() {
-  const x = useSharedValue(getRandomWidth());
-  const y = useSharedValue(getRandomHeight());
-  const hue = useSharedValue(getRandomHue());
+function MovingCircle({ scale }: { scale: number }) {
+  const x = useSharedValue(getRandomWidth(scale));
+  const y = useSharedValue(getRandomHeight(scale));
+  const hue = useSharedValue(getRandomHue(scale));
 
   const duration = 2000 + Math.random() * 1000;
   const power = Math.random();
   const config = { duration, easing: Easing.linear };
-  const size = 50 + power * ExampleHeight * 0.3;
+  const size = 50 * scale + power * exampleHeight * 0.3;
 
   const update = () => {
-    x.value = withTiming(x.value + getRandomPositionDiff(), config);
-    y.value = withTiming(y.value + getRandomPositionDiff(), config);
-    hue.value = withTiming(hue.value + getRandomHueDiff(), config);
+    x.value = withTiming(x.value + getRandomPositionDiff(scale), config);
+    y.value = withTiming(y.value + getRandomPositionDiff(scale), config);
+    hue.value = withTiming(hue.value + getRandomHueDiff(scale), config);
   };
 
   React.useEffect(() => {
@@ -72,33 +73,33 @@ function MovingCircle() {
 
 interface BokehProps {
   count: number;
+  scale: number;
 }
 
-function Bokeh({ count }: BokehProps) {
+function Bokeh({ count, scale }: BokehProps) {
   return (
     <>
       {[...Array(count)].map((_, i) => (
-        <MovingCircle key={i} />
+        <MovingCircle scale={scale} key={i} />
       ))}
     </>
   );
 }
 
 export function BokehExample() {
+  const { scale } = useScale();
   return (
     <AnimationDemo title={"Reanimated's bokeh"}>
-      <Canvas style={styles.canvas}>
+      <Canvas
+        style={{
+          height: exampleHeight * scale,
+          width: '100%' as const,
+          backgroundColor: 'black' as const,
+        }}
+      >
         <Fill color="black" />
-        <Bokeh count={100} />
+        <Bokeh scale={scale} count={100} />
       </Canvas>
     </AnimationDemo>
   );
 }
-
-const styles = StyleSheet.create({
-  canvas: {
-    height: ExampleHeight,
-    width: '100%' as const,
-    backgroundColor: 'black' as const,
-  },
-});

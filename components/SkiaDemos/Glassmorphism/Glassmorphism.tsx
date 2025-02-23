@@ -22,7 +22,7 @@ export const Glassmorphism = () => {
   const { width: screenWidth, scale } = useScale();
   const width = 900 * scale;
   const height = 400 * scale;
-  const c = vec(screenWidth / 2, height * 0.6);
+  const c = vec(screenWidth / 2.5, height * 0.6);
   const r = c.x - 32;
   const rect = useMemo(() => ({ x: 0, y: c.y, width, height }), [c.y, width]);
 
@@ -43,7 +43,7 @@ export const Glassmorphism = () => {
   const styles = demoStyles(screenWidth, height);
   return (
     <ThemedView style={styles.container}>
-      <Canvas style={{ width, height }} opaque>
+      <Canvas style={{ width, height, marginLeft: -100 * scale }} opaque>
         <Fill color="rgb(128,128,128)" />
         <Circle c={c} r={radius}>
           <LinearGradient

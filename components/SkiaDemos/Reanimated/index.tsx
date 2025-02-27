@@ -24,7 +24,7 @@ export const ReanimatedExample: React.FC = () => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: 20,
+    padding: 20,
     paddingBottom: 80,
   },
 });

@@ -25,16 +25,16 @@ interface RingProps {
 }
 
 const Ring = ({ index, progress, total }: RingProps) => {
-  const { scale } = useScale();
-  const width = 1000 * scale;
-  const height = 500 * scale;
+  const { scale, height: screenHeight, width: screenWidth } = useScale();
+  const width = 0.9 * screenWidth;
+  const height = screenHeight - 200 * scale;
   const colorScheme = useColorScheme();
   const c1 = colorScheme === 'dark' ? '#61bea2' : '#223344';
   const c2 = colorScheme === 'dark' ? '#529ca0' : '#334455';
 
   const R = width / 8;
   const center = useMemo(
-    () => vec(width / 2 - 150, height / 2 - 100),
+    () => vec(width / 2 - 150 * scale, height / 2 - 100 * scale),
     [height, width],
   );
 
@@ -60,13 +60,13 @@ const Ring = ({ index, progress, total }: RingProps) => {
 };
 
 export const Breathe = () => {
-  const { width: screenWidth, scale } = useScale();
-  const width = 800 * scale;
-  const height = 400 * scale;
+  const { scale, height: screenHeight, width: screenWidth } = useScale();
+  const width = 0.9 * screenWidth;
+  const height = screenHeight - 200 * scale;
   const styles = demoStyles(screenWidth, height);
   const center = useMemo(
-    () => vec(screenWidth / 2.5, height / 2),
-    [height, width],
+    () => vec(screenWidth / 2, height / 2 + 200 * scale),
+    [height, screenWidth],
   );
 
   const colorScheme = useColorScheme();
@@ -79,14 +79,14 @@ export const Breathe = () => {
 
   return (
     <ThemedView style={styles.container}>
-      <Canvas style={{ width, height, marginLeft: -200 * scale }} opaque>
+      <Canvas style={{ width, height }} opaque>
         <Fill
           color={
             colorScheme === 'dark' ? 'rgb(20, 30, 40)' : 'rgb(247, 249, 251)'
           }
         />
         <Group origin={center} transform={transform} blendMode="hardLight">
-          <BlurMask style="solid" blur={40} />
+          <BlurMask style="solid" blur={40 * scale} />
           {new Array(6).fill(0).map((_, index) => {
             return (
               <Ring key={index} index={index} progress={progress} total={6} />

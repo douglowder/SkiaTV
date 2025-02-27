@@ -19,10 +19,10 @@ import { ThemedView } from '../../ThemedView';
 import { useScale } from '@/hooks/useScale';
 
 export const Glassmorphism = () => {
-  const { width: screenWidth, scale } = useScale();
-  const width = 900 * scale;
-  const height = 400 * scale;
-  const c = vec(screenWidth / 2.5, height * 0.6);
+  const { width: screenWidth, scale, height: screenHeight } = useScale();
+  const width = 0.9 * screenWidth;
+  const height = screenHeight - 200 * scale;
+  const c = vec(width / 2, height / 2);
   const r = c.x - 32;
   const rect = useMemo(() => ({ x: 0, y: c.y, width, height }), [c.y, width]);
 
@@ -43,7 +43,7 @@ export const Glassmorphism = () => {
   const styles = demoStyles(screenWidth, height);
   return (
     <ThemedView style={styles.container}>
-      <Canvas style={{ width, height, marginLeft: -100 * scale }} opaque>
+      <Canvas style={{ width, height }} opaque>
         <Fill color="rgb(128,128,128)" />
         <Circle c={c} r={radius}>
           <LinearGradient
@@ -52,7 +52,7 @@ export const Glassmorphism = () => {
             colors={['#FFF723', '#E70696']}
           />
         </Circle>
-        <BackdropFilter filter={<Blur blur={10} />} clip={rect}>
+        <BackdropFilter filter={<Blur blur={10 * scale} />} clip={rect}>
           <Fill color="rgba(0, 0, 0, 0.3)" />
         </BackdropFilter>
       </Canvas>

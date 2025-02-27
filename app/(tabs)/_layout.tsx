@@ -1,11 +1,17 @@
-import { Tabs } from 'expo-router';
 import React from 'react';
 import { Platform, Pressable } from 'react-native';
 import { BottomTabBarButtonProps } from '@react-navigation/bottom-tabs';
+import { withLayoutContext } from 'expo-router';
+import { createNativeBottomTabNavigator } from '@bottom-tabs/react-navigation';
+
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { useTextStyles } from '@/hooks/useTextStyles';
 import { useScale } from '@/hooks/useScale';
+
+export const Tabs = withLayoutContext(
+  createNativeBottomTabNavigator().Navigator,
+);
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();

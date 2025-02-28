@@ -1,22 +1,45 @@
-# Expo Router TV demo 👋
+# SkiaTV demo 👋
 
-![Apple TV screen shot](https://github.com/douglowder/examples/assets/6577821/a881466f-a7a0-4c66-b1fc-33235c466997)
-![Android TV screen shot](https://github.com/douglowder/examples/assets/6577821/815c8e01-8275-4cc1-bd57-b9c8bce1fb02)
-
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app), and can be built either for TV devices or mobile devices.
 
 This project uses
 
 - the [React Native TV fork](https://github.com/react-native-tvos/react-native-tvos), which supports both phone (Android and iOS) and TV (Android TV and Apple TV) targets
 - the [React Native TV config plugin](https://github.com/react-native-tvos/config-tv/tree/main/packages/config-tv) to allow Expo prebuild to modify the project's native files for TV builds
+- the [Shopify react-native-skia](https://shopify.github.io/react-native-skia/) package to render high performance 2D graphics.
+- the [victory-native](https://commerce.nearform.com/open-source/victory-native/) package, which uses Skia for charting and graphing data.
+
+This app includes the following demos from the `react-native-skia` examples:
+
+- Breathe
+- Glassmorphism
+- Reanimated
+
+This app also includes the following demos from the `victory-native` examples:
+
+- Line Chart
+- Bar Chart
+
+The demos have been slightly modified to render and size correctly on TV, and resize correctly on iPad screen rotations.
 
 ## 🚀 How to use
 
 - `cd` into the project
 
+- Build for TV devices
+
 ```sh
 yarn
-yarn prebuild # Executes Expo prebuild with TV modifications
+yarn prebuild # Executes a clean Expo prebuild to generate iOS and Android native files
+yarn ios # Build and run for iOS
+yarn android # Build for Android
+```
+
+- Build for mobile devices (including iPad tablet support)
+
+```sh
+yarn
+yarn prebuild:tv # Executes a clean Expo prebuild to generate tvOS and Android TV native files
 yarn ios # Build and run for Apple TV
 yarn android # Build for Android TV
 ```
@@ -28,22 +51,6 @@ yarn android # Build for Android TV
 ## Development
 
 You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-This project includes a [demo](./components/EventHandlingDemo.tsx)showing how to use React Native TV APIs to highlight controls as the user navigates the screen with the remote control.
-
-## TV specific file extensions
-
-This project includes an [example Metro configuration](./metro.config.js) that allows Metro to resolve application source files with TV-specific code, indicated by specific file extensions (`*.ios.tv.tsx`, `*.android.tv.tsx`, `*.tv.tsx`). The [ExternalLink](./components/ExternalLink.tsx) component makes use of this by having a [separate TV source file](./components/ExternalLink.tv.tsx) that avoids importing packages that don't exist on Apple TV.
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
 
 ## Learn more
 

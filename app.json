@@ -43,6 +43,7 @@
       "typedRoutes": true
     },
     "newArchEnabled": true,
+    "orientation": "portrait",
     "name": "SkiaTV",
     "slug": "SkiaTV"
   }

@@ -3,9 +3,9 @@
   "main": "expo-router/entry",
   "version": "1.0.0",
   "scripts": {
-    "start": "EXPO_TV=1 expo start",
-    "android": "EXPO_TV=1 expo run:android",
-    "ios": "EXPO_TV=1 expo run:ios",
+    "start": "expo start",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
     "web": "expo start --web",
     "reset-project": "./scripts/reset-project.js",
     "test": "jest --watchAll",

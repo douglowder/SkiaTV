@@ -24,7 +24,7 @@ const Font = require('@/assets/fonts/SF-Mono-Semibold.otf');
 export const AnimateTextOnPath = () => {
   const { width: windowWidth, scale } = useScale();
   const width = windowWidth * 0.9;
-  const font = useFont(Font, 12 * scale);
+  const font = useFont(Font, 20 * scale);
 
   const { path1, path2 } = useMemo(() => {
     const p1 = Skia.Path.Make();

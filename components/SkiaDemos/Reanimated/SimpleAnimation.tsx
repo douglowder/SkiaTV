@@ -12,8 +12,8 @@ import { AnimationDemo, Size } from './Components';
 import { useScale } from '@/hooks/useScale';
 
 export const SimpleAnimation = () => {
-  const { width: fullWindowWidth } = useScale();
-  const windowWidth = fullWindowWidth * 0.9;
+  const { scale, width: fullWindowWidth } = useScale();
+  const windowWidth = fullWindowWidth;
   const width = useSharedValue(20);
   const rect = useDerivedValue(() => {
     return { x: 0, y: 10, width: width.value, height: Size };
@@ -26,18 +26,16 @@ export const SimpleAnimation = () => {
   }, [width, windowWidth]);
   return (
     <AnimationDemo title={'Basic animation using derived values'}>
-      <Canvas style={styles.canvas}>
+      <Canvas
+        style={{
+          height: 40 * scale,
+          width: windowWidth,
+          backgroundColor: '#FEFEFE' as const,
+        }}
+      >
         <Fill color="white" />
         <Rect rect={rect} color="#8556E5" />
       </Canvas>
     </AnimationDemo>
   );
 };
-
-const styles = StyleSheet.create({
-  canvas: {
-    height: 40,
-    width: '80%' as const,
-    backgroundColor: '#FEFEFE' as const,
-  },
-});

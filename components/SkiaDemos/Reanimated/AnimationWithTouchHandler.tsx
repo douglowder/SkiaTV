@@ -9,7 +9,7 @@ import { useScale } from '@/hooks/useScale';
 
 export const AnimationWithTouchHandler = () => {
   const { width: windowWidth, scale } = useScale();
-  const width = windowWidth * 0.8;
+  const width = windowWidth * 0.9;
 
   const translateX = useSharedValue((width - Size - Padding) / 2);
 

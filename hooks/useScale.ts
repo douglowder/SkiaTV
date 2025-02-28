@@ -6,7 +6,7 @@ export type ScaleResult = {
   scale: number;
 };
 export function useScale(): ScaleResult {
-  const { width, height } = Dimensions.get('screen');
+  const { width, height } = useWindowDimensions();
   const scale = Platform.isTV ? width / 1000 : 1;
   return {
     width,

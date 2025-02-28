@@ -17,7 +17,7 @@ const BgColor = '#EC795A';
 
 export const SpringBackTouchAnimation = () => {
   const { width: windowWidth, scale } = useScale();
-  const width = windowWidth * 0.8;
+  const width = windowWidth * 0.9;
 
   const startX = width / 2 - (Size * 2 - Padding) + Size;
   const startY = 2 * Size;
@@ -62,7 +62,13 @@ export const SpringBackTouchAnimation = () => {
       }}
     >
       <GestureDetector gesture={gesture}>
-        <Canvas style={styles.canvas}>
+        <Canvas
+          style={{
+            height: 80 * scale,
+            width: '80%' as const,
+            backgroundColor: '#FEFEFE' as const,
+          }}
+        >
           <Fill color="white" />
           <Line
             p1={{ x: width / 2 - (Size - Padding), y: 0 }}
@@ -84,11 +90,3 @@ export const SpringBackTouchAnimation = () => {
     </AnimationDemo>
   );
 };
-
-const styles = StyleSheet.create({
-  canvas: {
-    height: 280,
-    width: '80%' as const,
-    backgroundColor: '#FEFEFE' as const,
-  },
-});

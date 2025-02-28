@@ -19,25 +19,25 @@ function getRandomWidth(scale: number) {
 }
 
 function getRandomHeight(scale: number) {
-  return Math.random() * exampleHeight;
+  return Math.random() * exampleHeight * scale;
 }
 
-function getRandomHue(scale: number) {
-  return 100 + Math.random() * 100 * scale;
+function getRandomHue() {
+  return 100 + Math.random() * 100;
 }
 
 function getRandomPositionDiff(scale: number) {
   return -100 + Math.random() * 200 * scale;
 }
 
-function getRandomHueDiff(scale: number) {
-  return Math.random() * 100 * scale;
+function getRandomHueDiff() {
+  return Math.random() * 100;
 }
 
 function MovingCircle({ scale }: { scale: number }) {
   const x = useSharedValue(getRandomWidth(scale));
   const y = useSharedValue(getRandomHeight(scale));
-  const hue = useSharedValue(getRandomHue(scale));
+  const hue = useSharedValue(getRandomHue());
 
   const duration = 2000 + Math.random() * 1000;
   const power = Math.random();
@@ -47,7 +47,7 @@ function MovingCircle({ scale }: { scale: number }) {
   const update = () => {
     x.value = withTiming(x.value + getRandomPositionDiff(scale), config);
     y.value = withTiming(y.value + getRandomPositionDiff(scale), config);
-    hue.value = withTiming(hue.value + getRandomHueDiff(scale), config);
+    hue.value = withTiming(hue.value + getRandomHueDiff(), config);
   };
 
   React.useEffect(() => {

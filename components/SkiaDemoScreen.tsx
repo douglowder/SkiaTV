@@ -1,4 +1,4 @@
-import { StyleSheet, TVFocusGuideView } from 'react-native';
+import { Platform, StyleSheet, TVFocusGuideView } from 'react-native';
 
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
@@ -39,7 +39,10 @@ const useDemoStyles = function () {
       flexDirection: 'row',
       gap: 8 * scale,
       margin: 20 * scale,
-      marginTop: 100 * scale,
+      marginTop:
+        Platform.OS === 'ios' && (Platform.isTV || Platform.isPad)
+          ? 100 * scale
+          : 20 * scale,
     },
   });
 };

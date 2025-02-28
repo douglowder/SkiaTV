@@ -66,7 +66,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="linechart"
         options={{
-          title: 'Line Chart',
+          title: 'Line Graph',
           tabBarLabelStyle: textStyles.default,
           tabBarIcon: () => null,
         }}

@@ -3,6 +3,7 @@ import { Image, StyleSheet } from 'react-native';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import { HomeScreenButton } from '@/components/HomeScreenButton';
 import { useScale } from '@/hooks/useScale';
 
 export default function HomeScreen() {
@@ -20,6 +21,31 @@ export default function HomeScreen() {
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">TV demos using react-native-skia</ThemedText>
       </ThemedView>
+      <HomeScreenButton
+        title="🧘 Breathe"
+        description="Simple declarative example"
+        route="breathe"
+      />
+      <HomeScreenButton
+        title="🪞 Glassmorphism"
+        description="Glassmorphism"
+        route="glassmorphism"
+      />
+      <HomeScreenButton
+        title="🎥 Reanimated"
+        description="Reanimated & Gesture Handler"
+        route="reanimated"
+      />
+      <HomeScreenButton
+        title="📉 Bar Chart"
+        description="Bar chart with victory-native"
+        route="barchart"
+      />
+      <HomeScreenButton
+        title="📉 Line Graph"
+        description="Line graph with victory-native"
+        route="linechart"
+      />
     </ParallaxScrollView>
   );
 }

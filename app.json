@@ -1,6 +1,22 @@
 {
   "expo": {
-    "scheme": "routertv",
+    "android": {
+      "splash": {
+        "image": "./assets/images/splash.png"
+      }
+    },
+    "experiments": {
+      "typedRoutes": true
+    },
+    "icon": "./assets/tv_icons/icon-760x760.png",
+    "ios": {
+      "splash": {
+        "image": "./assets/images/splash.png"
+      }
+    },
+    "name": "SkiaMultiplatform",
+    "newArchEnabled": true,
+    "orientation": "portrait",
     "plugins": [
       [
         "@react-native-tvos/config-tv",
@@ -30,28 +46,12 @@
       "expo-font",
       "react-native-bottom-tabs"
     ],
-    "android": {
-      "splash": {
-        "image": "./assets/images/splash.png"
-      }
-    },
-    "ios": {
-      "splash": {
-        "image": "./assets/images/splash.png"
-      }
-    },
+    "scheme": "skiamultiplatform",
+    "slug": "SkiaMultiplatform",
     "web": {
       "bundler": "metro",
-      "output": "static",
-      "favicon": "./assets/images/favicon.png"
-    },
-    "experiments": {
-      "typedRoutes": true
-    },
-    "newArchEnabled": true,
-    "orientation": "portrait",
-    "icon": "./assets/tv_icons/icon-760x760.png",
-    "name": "SkiaTV",
-    "slug": "SkiaTV"
+      "favicon": "./assets/images/favicon.png",
+      "output": "static"
+    }
   }
 }

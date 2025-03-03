@@ -89,7 +89,13 @@ function Bokeh({ count, scale }: BokehProps) {
 export function BokehExample() {
   const { scale } = useScale();
   return (
-    <AnimationDemo title={"Reanimated's bokeh"}>
+    <AnimationDemo
+      title={"Reanimated's bokeh"}
+      button={{
+        title: '',
+        actions: {},
+      }}
+    >
       <Canvas
         style={{
           height: exampleHeight * scale,

@@ -37,34 +37,40 @@ export const LineChart = () => {
 
   return (
     <TVFocusGuideView autoFocus>
-      <Pressable
-        onPress={() => {
-          if (chartData === DATA) {
-            setChartData(DATA2);
-          } else {
-            setChartData(DATA);
-          }
-        }}
-        style={({ pressed, focused }) => ({
-          opacity: pressed || focused ? 0.6 : 1.0,
-        })}
-      >
-        <ThemedText type="defaultSemiBold">Update Chart</ThemedText>
-      </Pressable>
-
       <ThemedView
         style={{
           width: '100%',
           alignItems: 'center',
           paddingHorizontal: 5 * scale,
-          paddingVertical: 30 * scale,
         }}
       >
         <ThemedView
           style={{
+            alignItems: 'flex-start',
+            paddingHorizontal: 5 * scale,
+            width: '95%',
+          }}
+        >
+          <Pressable
+            onPress={() => {
+              if (chartData === DATA) {
+                setChartData(DATA2);
+              } else {
+                setChartData(DATA);
+              }
+            }}
+            style={({ pressed, focused }) => ({
+              opacity: pressed || focused ? 0.6 : 1.0,
+            })}
+          >
+            <ThemedText type="defaultSemiBold">Update Chart</ThemedText>
+          </Pressable>
+        </ThemedView>
+        <ThemedView
+          style={{
             paddingTop: 10 * scale,
             width: '95%',
-            height: '60%',
+            height: '55%',
           }}
         >
           <CartesianChart

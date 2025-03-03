@@ -6,6 +6,7 @@
         "@react-native-tvos/config-tv",
         {
           "androidTVBanner": "./assets/tv_icons/icon-400x240.png",
+          "androidTVIcon": "./assets/tv_icons/icon-760x760.png",
           "appleTVImages": {
             "icon": "./assets/tv_icons/icon-1280x768.png",
             "iconSmall": "./assets/tv_icons/icon-400x240.png",
@@ -49,6 +50,7 @@
     },
     "newArchEnabled": true,
     "orientation": "portrait",
+    "icon": "./assets/tv_icons/icon-760x760.png",
     "name": "SkiaTV",
     "slug": "SkiaTV"
   }

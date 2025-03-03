@@ -1,4 +1,8 @@
-import { Platform, StyleSheet, TVFocusGuideView } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
+
+const TVFocusGuideView = Platform.isTV
+  ? require('react-native').TVFocusGuideView
+  : View;
 
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';

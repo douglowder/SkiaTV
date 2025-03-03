@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 
-import { Text, Box, Button, ButtonText, Pressable } from '@gluestack-ui/themed';
 import { CartesianChart, Bar, useChartPressState } from 'victory-native';
 import { Circle, useFont, vec } from '@shopify/react-native-skia';
-import { View, useColorScheme } from 'react-native';
-import { COLORMODES } from '@gluestack-style/react/lib/typescript/types';
+import { useColorScheme, Pressable } from 'react-native';
 import { LinearGradient, Text as SKText } from '@shopify/react-native-skia';
 import { useDerivedValue } from 'react-native-reanimated';
 import { useScale } from '@/hooks/useScale';
+import { ThemedView } from '@/components/ThemedView';
+import { ThemedText } from '@/components/ThemedText';
 
 const inter = require('@/assets/fonts/roboto.ttf');
 
@@ -22,7 +22,7 @@ export const BarChart = () => {
   const [data, setData] = useState(DATA(5));
   const font = useFont(inter, 12 * scale);
   const toolTipFont = useFont(inter, 24 * scale);
-  const colorMode = useColorScheme() as COLORMODES;
+  const colorMode = useColorScheme();
   const { state, isActive } = useChartPressState({
     x: 0,
     y: { listenCount: 0 },
@@ -48,13 +48,19 @@ export const BarChart = () => {
   }, [value, toolTipFont]);
 
   return (
-    <Box
-      $dark-bg="$black"
-      $light-bg="$white"
-      paddingHorizontal={5 * scale}
-      paddingVertical={30 * scale}
+    <ThemedView
+      style={{
+        paddingHorizontal: 5 * scale,
+        paddingVertical: 30 * scale,
+      }}
     >
-      <Box paddingTop={10 * scale} width="95%" height="80%">
+      <ThemedView
+        style={{
+          paddingTop: 10 * scale,
+          width: '95%',
+          height: '80%',
+        }}
+      >
         <CartesianChart
           xKey="month"
           padding={5 * scale}
@@ -119,16 +125,23 @@ export const BarChart = () => {
             );
           }}
         </CartesianChart>
-      </Box>
-      <Box paddingTop={30 * scale} width="95%" height="20%" alignItems="center">
+      </ThemedView>
+      <ThemedView
+        style={{
+          paddingTop: 30 * scale,
+          width: '95%',
+          height: '20%',
+          alignItems: 'center',
+        }}
+      >
         <Pressable
           onPress={() => {
             setData(DATA(5));
           }}
         >
-          <ButtonText>Update Chart</ButtonText>
+          <ThemedText>Update Chart</ThemedText>
         </Pressable>
-      </Box>
-    </Box>
+      </ThemedView>
+    </ThemedView>
   );
 };

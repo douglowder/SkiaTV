@@ -1,8 +1,7 @@
-import { Box } from '@gluestack-ui/themed';
 import React, { useState } from 'react';
 import { Pressable } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
-import { COLORMODES } from '@gluestack-style/react/lib/typescript/types';
+import { ThemedView } from '@/components/ThemedView';
 import {
   Circle,
   LinearGradient,
@@ -26,7 +25,7 @@ export const LineChart = () => {
   const font = useFont(inter, 12 * scale);
   const chartFont = useFont(interBold, 30 * scale);
   const { state, isActive } = useChartPressState({ x: 0, y: { highTmp: 0 } });
-  const colorMode = useColorScheme() as COLORMODES;
+  const colorMode = useColorScheme();
   const [chartData, setChartData] = useState(DATA);
 
   const value = useDerivedValue(() => {
@@ -53,15 +52,21 @@ export const LineChart = () => {
         <ThemedText type="defaultSemiBold">Update Chart</ThemedText>
       </Pressable>
 
-      <Box
-        width="100%"
-        $dark-bg="$black"
-        $light-bg="$white"
-        alignItems="center"
-        paddingHorizontal={5 * scale}
-        paddingVertical={30 * scale}
+      <ThemedView
+        style={{
+          width: '100%',
+          alignItems: 'center',
+          paddingHorizontal: 5 * scale,
+          paddingVertical: 30 * scale,
+        }}
       >
-        <Box paddingTop={10 * scale} width="95%" height="60%">
+        <ThemedView
+          style={{
+            paddingTop: 10 * scale,
+            width: '95%',
+            height: '60%',
+          }}
+        >
           <CartesianChart
             data={chartData}
             xKey="day"
@@ -112,9 +117,9 @@ export const LineChart = () => {
               </>
             )}
           </CartesianChart>
-        </Box>
+        </ThemedView>
         <BottomSection />
-      </Box>
+      </ThemedView>
     </TVFocusGuideView>
   );
 };

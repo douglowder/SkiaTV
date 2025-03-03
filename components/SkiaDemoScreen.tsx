@@ -8,7 +8,7 @@ import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { useScale } from '@/hooks/useScale';
 import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
+import { useThemeColor } from '@/hooks/useThemeColor';
 
 export const SkiaDemoScreen = ({
   title,
@@ -30,14 +30,13 @@ export const SkiaDemoScreen = ({
 
 const useDemoStyles = function () {
   const { scale } = useScale();
-  const colorScheme = useColorScheme();
-  const colors = Colors[colorScheme ?? 'light'];
+  const backgroundColor = useThemeColor({}, 'background');
   return StyleSheet.create({
     container: {
       flex: 1,
       width: '100%',
       height: '100%',
-      backgroundColor: colors.background,
+      backgroundColor,
     },
     titleContainer: {
       flexDirection: 'row',

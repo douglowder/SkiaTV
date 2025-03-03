@@ -11,13 +11,13 @@ import { GestureDetector, Gesture } from 'react-native-gesture-handler';
 
 import { AnimationDemo, Size, Padding } from './Components';
 import { useScale } from '@/hooks/useScale';
-
-const FgColor = '#DC4C4C';
-const BgColor = '#EC795A';
+import { useThemeColor } from '@/hooks/useThemeColor';
 
 export const SpringBackTouchAnimation = () => {
   const { width: windowWidth, scale } = useScale();
   const width = windowWidth * 0.9;
+  const FgColor = useThemeColor({}, 'link');
+  const BgColor = useThemeColor({}, 'background');
 
   const startX = width / 2 - (Size * 2 - Padding) + Size;
   const startY = 2 * Size;
@@ -66,10 +66,10 @@ export const SpringBackTouchAnimation = () => {
           style={{
             height: 80 * scale,
             width: '80%' as const,
-            backgroundColor: '#FEFEFE' as const,
+            backgroundColor: BgColor,
           }}
         >
-          <Fill color="white" />
+          <Fill color={BgColor} />
           <Line
             p1={{ x: width / 2 - (Size - Padding), y: 0 }}
             p2={rectCenter}

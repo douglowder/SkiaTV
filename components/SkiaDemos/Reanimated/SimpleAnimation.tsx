@@ -10,8 +10,11 @@ import { Canvas, Fill, Rect } from '@shopify/react-native-skia';
 
 import { AnimationDemo, Size } from './Components';
 import { useScale } from '@/hooks/useScale';
+import { useThemeColor } from '@/hooks/useThemeColor';
 
 export const SimpleAnimation = () => {
+  const backgroundColor = useThemeColor({}, 'background');
+  const barColor = useThemeColor({}, 'icon');
   const { scale, width: fullWindowWidth } = useScale();
   const windowWidth = fullWindowWidth;
   const width = useSharedValue(20);
@@ -30,11 +33,11 @@ export const SimpleAnimation = () => {
         style={{
           height: 40 * scale,
           width: windowWidth,
-          backgroundColor: '#FEFEFE' as const,
+          backgroundColor,
         }}
       >
-        <Fill color="white" />
-        <Rect rect={rect} color="#8556E5" />
+        <Fill color={backgroundColor} />
+        <Rect rect={rect} color={barColor} />
       </Canvas>
     </AnimationDemo>
   );

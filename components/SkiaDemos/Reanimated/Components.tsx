@@ -57,10 +57,12 @@ const useDemoStyles = () => {
   const { scale } = useScale();
   const plainColor = useThemeColor({}, 'text');
   const focusedColor = useThemeColor({}, 'tint');
+  const backgroundColor = useThemeColor({}, 'background');
   return StyleSheet.create({
     container: {
       marginBottom: 20,
       paddingHorizontal: Padding / 2,
+      backgroundColor,
     },
     text: {
       fontSize: 16 * scale,

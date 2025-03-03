@@ -17,6 +17,7 @@ import {
 
 import { AnimationDemo, Padding } from './Components';
 import { useScale } from '@/hooks/useScale';
+import { useThemeColor } from '@/hooks/useThemeColor';
 
 const ExampleHeight = 60;
 const Font = require('@/assets/fonts/SF-Mono-Semibold.otf');
@@ -25,6 +26,8 @@ export const AnimateTextOnPath = () => {
   const { width: windowWidth, scale } = useScale();
   const width = windowWidth * 0.9;
   const font = useFont(Font, 20 * scale);
+  const backgroundColor = useThemeColor({}, 'background');
+  const textColor = useThemeColor({}, 'text');
 
   const { path1, path2 } = useMemo(() => {
     const p1 = Skia.Path.Make();
@@ -64,20 +67,23 @@ export const AnimateTextOnPath = () => {
 
   return (
     <AnimationDemo title={'Interpolating text on path.'}>
-      <Canvas style={styles.canvas}>
-        <Fill color="white" />
+      <Canvas
+        style={{
+          height: ExampleHeight,
+          width: '80%' as const,
+          backgroundColor,
+        }}
+      >
+        <Fill color={backgroundColor} />
         {font && (
-          <TextPath path={path} font={font} text="Hello World from RN Skia!" />
+          <TextPath
+            color={textColor}
+            path={path}
+            font={font}
+            text="Hello World from RN Skia!"
+          />
         )}
       </Canvas>
     </AnimationDemo>
   );
 };
-
-const styles = StyleSheet.create({
-  canvas: {
-    height: ExampleHeight,
-    width: '80%' as const,
-    backgroundColor: '#FEFEFE' as const,
-  },
-});

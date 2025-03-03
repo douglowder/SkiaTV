@@ -11,6 +11,7 @@ import {
 
 import { AnimationDemo, Size, Padding } from './Components';
 import { useScale } from '@/hooks/useScale';
+import { useThemeColor } from '@/hooks/useThemeColor';
 
 function mix(value: number, x: number, y: number) {
   'worklet';
@@ -19,6 +20,8 @@ function mix(value: number, x: number, y: number) {
 
 export const InterpolationWithEasing = () => {
   const { width: windowWidth, scale } = useScale();
+  const backgroundColor = useThemeColor({}, 'background');
+  const circleColor = useThemeColor({}, 'link');
   const width = windowWidth;
   const progress = useSharedValue(0);
   const position = useDerivedValue(() => {
@@ -40,11 +43,11 @@ export const InterpolationWithEasing = () => {
         style={{
           height: 120 * scale,
           width,
-          backgroundColor: '#FEFEFE' as const,
+          backgroundColor,
         }}
       >
-        <Fill color="white" />
-        <Circle cx={position} cy={50 * scale} r={radius} color="#DC4C4C" />
+        <Fill color={backgroundColor} />
+        <Circle cx={position} cy={50 * scale} r={radius} color={circleColor} />
       </Canvas>
     </AnimationDemo>
   );

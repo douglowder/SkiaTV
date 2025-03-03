@@ -6,10 +6,13 @@ import { useSharedValue, withDecay, withTiming } from 'react-native-reanimated';
 
 import { AnimationDemo, Size, Padding } from './Components';
 import { useScale } from '@/hooks/useScale';
+import { useThemeColor } from '@/hooks/useThemeColor';
 
 export const AnimationWithTouchHandler = () => {
   const { width: windowWidth, scale } = useScale();
   const width = windowWidth * 0.9;
+  const backgroundColor = useThemeColor({}, 'background');
+  const linkColor = useThemeColor({}, 'link');
 
   const translateX = useSharedValue((width - Size - Padding) / 2);
 
@@ -59,17 +62,22 @@ export const AnimationWithTouchHandler = () => {
           style={{
             height: 80 * scale,
             width: '80%' as const,
-            backgroundColor: '#FEFEFE' as const,
+            backgroundColor,
           }}
         >
-          <Fill color="white" />
+          <Fill color={backgroundColor} />
           <Circle
             cx={translateX}
             cy={20 * scale}
             r={10 * scale}
-            color="#3E3E"
+            color={linkColor}
           />
-          <Circle cx={translateX} cy={20 * scale} r={8 * scale} color="#AEAE" />
+          <Circle
+            cx={translateX}
+            cy={20 * scale}
+            r={8 * scale}
+            color={linkColor}
+          />
         </Canvas>
       </GestureDetector>
     </AnimationDemo>

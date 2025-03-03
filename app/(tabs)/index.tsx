@@ -24,34 +24,34 @@ export default function HomeScreen() {
       <HomeScreenButton
         title="🧘 Breathe"
         description="Simple declarative example"
-        route="breathe"
+        route="/(tabs)/breathe"
       />
       <HomeScreenButton
         title="🪞 Glassmorphism"
         description="Glassmorphism"
-        route="glassmorphism"
+        route="/(tabs)/glass"
       />
       <HomeScreenButton
         title="🎥 Reanimated"
         description="Reanimated & Gesture Handler"
-        route="reanimated"
+        route="/(tabs)/reanimated"
       />
       <HomeScreenButton
         title="📉 Bar Chart"
         description="Bar chart with victory-native"
-        route="barchart"
+        route="/(tabs)/barchart"
       />
       <HomeScreenButton
         title="📉 Line Graph"
         description="Line graph with victory-native"
-        route="linechart"
+        route="/(tabs)/linechart"
       />
     </ParallaxScrollView>
   );
 }
 
 const useHomeScreenStyles = function () {
-  const { scale } = useScale();
+  const { width, height, scale } = useScale();
   return StyleSheet.create({
     titleContainer: {
       flexDirection: 'row',

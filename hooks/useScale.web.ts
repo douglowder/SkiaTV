@@ -7,7 +7,7 @@ export type ScaleResult = {
 export function useScale(): ScaleResult {
   const width = global.window.innerWidth;
   const height = global.window.innerHeight;
-  const scale = 1.0;
+  const scale = width > height ? width / 1000 : height / 1000;
   return {
     width,
     height,

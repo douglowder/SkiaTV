@@ -62,11 +62,11 @@ const Ring = ({ index, progress, total }: RingProps) => {
 export const Breathe = () => {
   const { scale, height: screenHeight, width: screenWidth } = useScale();
   const width = 0.9 * screenWidth;
-  const height = screenHeight - 200 * scale;
+  const height = screenHeight;
   const styles = demoStyles(screenWidth, height);
   const center = useMemo(
-    () => vec(screenWidth / 2, height / 2 + 200 * scale),
-    [height, screenWidth],
+    () => vec(0.75 * width, 0.25 * height),
+    [height, width],
   );
 
   const colorScheme = useColorScheme();

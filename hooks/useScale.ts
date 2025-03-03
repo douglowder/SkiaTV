@@ -1,4 +1,4 @@
-import { Dimensions, Platform, useWindowDimensions } from 'react-native';
+import { useWindowDimensions } from 'react-native';
 
 export type ScaleResult = {
   width: number;
@@ -7,7 +7,7 @@ export type ScaleResult = {
 };
 export function useScale(): ScaleResult {
   const { width, height } = useWindowDimensions();
-  const scale = Platform.isTV ? width / 1000 : 1;
+  const scale = width > height ? width / 1000 : height / 1000;
   return {
     width,
     height,

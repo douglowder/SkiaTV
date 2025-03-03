@@ -81,7 +81,7 @@ const useParallaxScrollViewStyles = function () {
       flex: 1,
       padding: 32 * scale,
       gap: 16 * scale,
-      overflow: 'hidden',
+      overflow: 'visible',
     },
   });
 };

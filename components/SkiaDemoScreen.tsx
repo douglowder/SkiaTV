@@ -29,13 +29,14 @@ export const SkiaDemoScreen = ({
 };
 
 const useDemoStyles = function () {
-  const { scale } = useScale();
+  const { width, height, scale } = useScale();
   const backgroundColor = useThemeColor({}, 'background');
   return StyleSheet.create({
     container: {
       flex: 1,
       width: '100%',
       height: '100%',
+      paddingTop: height > width ? 100 * scale : 0,
       backgroundColor,
     },
     titleContainer: {

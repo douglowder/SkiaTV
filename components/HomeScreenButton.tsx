@@ -38,10 +38,10 @@ export const HomeScreenButton: React.FC<Props> = ({
 };
 
 const useStyles = () => {
-  const { scale } = useScale();
+  const { width, height, scale } = useScale();
   return StyleSheet.create({
     container: {
-      flexDirection: 'row',
+      flexDirection: width > height ? 'row' : 'column',
       justifyContent: 'flex-start',
     },
     textContainer: {

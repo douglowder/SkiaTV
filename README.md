@@ -1,6 +1,6 @@
-# SkiaTV demo 👋
+# Skia multiplatform demo 👋
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app), and can be built either for TV devices or mobile devices.
+This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app), and can be built for web, mobile devices (iOS, iPadOS, and Android), and TV devices (Apple TV, Android TV).
 
 This project uses
 
@@ -15,7 +15,7 @@ This app includes the following demos from the `react-native-skia` examples:
 - Glassmorphism
 - Reanimated
 
-This app also includes the following demos from the `victory-native` examples:
+For mobile and TV, this app includes the following demos from the `victory-native` examples:
 
 - Line Chart
 - Bar Chart
@@ -44,24 +44,21 @@ yarn ios # Build and run for Apple TV
 yarn android # Build for Android TV
 ```
 
+- Build for web
+
+```sh
+yarn
+yarn web # Runs the web app as a local development server on port 8081
+yarn build:web # Packages the web app for hosting
+```
+
+- Deploy to EAS hosting
+
+```sh
+eas init
+yarn deploy:web # Deploys the web app to EAS hosting (development environment)
+```
+
 > **_NOTE:_**
 > Setting the environment variable `EXPO_TV=1` enables the `@react-native-tvos/config-tv` plugin to modify the project for TV.
 > This can also be done by setting the parameter `isTV` to true in the `app.json`.
-
-## Development
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/learn): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
